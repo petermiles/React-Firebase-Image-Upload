@@ -34,15 +34,12 @@ class App extends Component {
         reader.readAsDataURL(file)
     }
     uploadImage(event) {
-      let that = this
         event.preventDefault();
         let file = this.state.file
         const storageRef = firebase.storage().ref();
         const uploadTask = storageRef.child('profilePictures/' + file.name).put(file);
         uploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
-          console.log(uploadTask.snapshot.downloadURL)
-            that.setState({downloadURL : uploadTask.snapshot.downloadURL})
-            console.log(this.state.downloadURL)
+            this.setState({downloadURL : uploadTask.snapshot.downloadURL})
         })
     }
 
